@@ -1,8 +1,7 @@
-def checkWordCount():
+def checkWordCount(filePath):
     try:
-        f = open('filePath', 'r')
-        content = f.read()
-        f.close()
+        with open(filePath, 'r', encoding='utf-8') as f:
+            content = f.read()
     except FileNotFoundError:
         print("file path dont exsit")
         return 
@@ -10,6 +9,8 @@ def checkWordCount():
     else:
         count = 0
         for word in content.split():
-            count += 1 
-        print("Total words:"+count)
+            clean_word = word.strip(",.!?;:\"'") 
+            if clean_word:
+                    count += 1 
+        print("Total words:"+ str(count))
         return count
